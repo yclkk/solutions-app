@@ -14,11 +14,31 @@ class Solution extends Component {
         ],
      } 
     handleDelete(solution) {
+        // filter作用：依次将solutions里的每一个元素作用一遍filter()函数，filter里面传一个函数，如果为true则保留，false则删除
         const solutions = this.state.solutions.filter(s => {return s !== solution});
         this.setState({
             solutions: solutions
         });
     }
+
+    handleAdd(solution) {
+        const solutions = [...this.state.solutions,
+            {key: 17, number:1171, title:"加工零件9", views:3272},
+        ];
+        this.setState({
+            solutions: solutions,
+        });
+    }
+
+
+    getButtonStyles() {
+        let styles = {
+            marginRight: "20px",
+
+        };
+
+        return styles;
+    };
 
     render() { 
         return (
@@ -28,7 +48,7 @@ class Solution extends Component {
                     <th>#</th>
                     <th>标题</th>
                     <th>阅读</th>
-                    <th>操作</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +57,11 @@ class Solution extends Component {
                         <td>{solution.number}</td>
                         <td>{solution.title}</td>
                         <td>{solution.views}</td>
-                        <td><button onClick={() => this.handleDelete(solution)} class="btn btn-danger">删除</button></td>
+               
+                        <td>
+                            <button onClick={() => this.handleAdd(solution)} className='btn btn-primary' style={this.getButtonStyles()}>增加</button>
+                            <button onClick={() => this.handleDelete(solution)} className="btn btn-danger">删除</button>
+                        </td>
                     </tr>
                 ))
                 }
